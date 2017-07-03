@@ -70,7 +70,7 @@ function customerTransaction(){
 			if ((res[0].stock_quantity-parseInt(purchase.quantity)) >= 0){
 				connection.query("UPDATE products SET ? WHERE ?", 
 					[{
-						stock_quantity: res[0].stock_quantity-parseInt(purchase.quantity)
+						stock_quantity: res[0].stock_quantity - parseInt(purchase.quantity)
 					},
 					{
 						item_id: purchase.item
@@ -81,6 +81,7 @@ function customerTransaction(){
 				console.log("You want to order " + purchase.quantity + ", but we only have " + res[0].stock_quantity + " in stock.");
 			}
 
+			// Function to print total order cost
 			function invoice(){
 				connection.query("SELECT * FROM products WHERE item_id = ?", [purchase.item],function(err, res){
 					console.log("The total cost of your purchase today is " 
@@ -90,6 +91,3 @@ function customerTransaction(){
 		});
 	});
 }
-
-
-// TO FIX: Handling when user inputs item_id greater than what is available
