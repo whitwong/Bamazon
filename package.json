@@ -1,0 +1,30 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Node application that connects to MySQL database to create a storefront.",
+  "main": "bamazonCustomer.js",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "inquirer": "^3.1.1",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whitwong/Bamazon.git"
+  },
+  "keywords": [
+    "storefront",
+    "MySQL",
+    "Node"
+  ],
+  "author": "Whitney Wong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whitwong/Bamazon/issues"
+  },
+  "homepage": "https://github.com/whitwong/Bamazon#readme"
+}

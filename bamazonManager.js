@@ -18,7 +18,7 @@ connection.connect(function(err){
 });
 
 // Function that prompts for manager options
-function options(){
+function managerOptions(){
 	inquirer.prompt([
 		{
 			type: "list",
@@ -60,41 +60,44 @@ function options(){
 				break;
 			// Allows manager to add inventory to database stock_quantity
 			case "Add to Inventory":
-				inquirer.prompt([
-					{
-						type: "input",
-						name: "item",
-						message: "Enter Item ID number of the product that you want to add inventory:",
-						validate: function(value){
-							if (isNaN(value) === false && typeof(parseInt(value)) === "number" && parseInt(value) > 0){
-								return true;
+				// This connection.query is to access length of response to create validation condition
+				connection.query("SELECT * FROM products", function(err, res){
+					inquirer.prompt([
+						{
+							type: "input",
+							name: "item",
+							message: "Enter Item ID number of the product that you want to add inventory:",
+							validate: function(value){
+								if (isNaN(value) === false && typeof(parseInt(value)) === "number" && parseInt(value) > 0 && parseInt(value) <= res.length){
+									return true;
+								}
+								return false;
 							}
-							return false;
-						}
-					},
-					{
-						type: "input",
-						name: "add",
-						message: "How many items do you want to add to inventory?",
-						validate: function(value){
-							if (isNaN(value) === false && typeof(parseInt(value)) === "number" && parseInt(value) > 0){
-								return true;
+						},
+						{
+							type: "input",
+							name: "add",
+							message: "How many items do you want to add to inventory?",
+							validate: function(value){
+								if (isNaN(value) === false && typeof(parseInt(value)) === "number" && parseInt(value) > 0){
+									return true;
+								}
+								return false;
 							}
-							return false;
 						}
-					}
-				]).then(function(inventory){
-					connection.query("SELECT * FROM products WHERE item_id = ?", [inventory.item], function(err, res){
-						connection.query("UPDATE products SET ? WHERE ?", 
-							[{
-								stock_quantity: res[0].stock_quantity + parseInt(inventory.add)
-							},
-							{
-								item_id: inventory.item
-							}], function(err, res){
-								console.log(inventory.add +" items have been added to Item ID #" + inventory.item);
-								askAgain();
-							});
+					]).then(function(inventory){
+						connection.query("SELECT * FROM products WHERE item_id = ?", [inventory.item], function(err, res){
+							connection.query("UPDATE products SET ? WHERE ?", 
+								[{
+									stock_quantity: res[0].stock_quantity + parseInt(inventory.add)
+								},
+								{
+									item_id: inventory.item
+								}], function(err, res){
+									console.log(inventory.add +" items have been added to Item ID #" + inventory.item);
+									askAgain();
+								});
+						});
 					});
 				});
 				break;
@@ -175,7 +178,7 @@ function askAgain(){
 		}
 	]).then(function(again){
 		if (again.confirm){
-			options();
+			managerOptions();
 		}
 		else{
 			console.log("All tasks are done.")
@@ -184,4 +187,4 @@ function askAgain(){
 }
 
 // Initial function call
-options();
+managerOptions();

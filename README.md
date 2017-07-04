@@ -1,2 +1,2 @@
 # Bamazon
-Create a node application storefront
+## Node application storefront
