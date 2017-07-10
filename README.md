@@ -63,7 +63,7 @@ The "Add New Product" option allows the user to add a new product to the store. 
 
 ![Screenshot of Add New Product](screenshots/managerAddProduct.PNG)
 
-After each action, the manager is prompted for whether or not they want to perform another task. Once the manager has completed his tasks, then the application will display a message that all tasks are done.
+After each action, the manager is prompted for whether or not they want to perform another task. Once the manager is done, then the application will display a message that all tasks are complete.
 
 - - -
 
@@ -87,4 +87,4 @@ The "Create New Department" option allows the user to add a new department to th
 
 ![Screenshot of Supervisor Create New Department](screenshots/supervisorNewDept.PNG)
 
-After each action, the supervisor is prompted for whether or not they want to perform another task. Once the supervisor has completed his tasks, then the application will display a message that all tasks are done.
+After each action, the supervisor is prompted for whether or not they want to perform another task. Once the supervisor is done, then the application will display a message that all tasks are complete.
