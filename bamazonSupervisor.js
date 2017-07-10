@@ -28,7 +28,7 @@ function supervisorOptions(){
 		}
 	]).then(function(sales){
 		var lookup = {
-			// Function that displays department overhead and total profits information
+			// Function that displays department overhead and total profits information. Uses MySQL 'JOIN' command and aliases.
 			"View Product Sales by Department": function(){
 				// Display database information using cli-table module
 				connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, "
@@ -40,7 +40,7 @@ function supervisorOptions(){
 					+ "ORDER BY departments.department_id", function(err, res){
 					// Table display setup
 					var table = new Table({
-						head: ["Departmet ID", "Department Name", "Overhead Cost", "Product Sales", "Total Profit"],
+						head: ["Department ID", "Department Name", "Overhead Cost", "Product Sales", "Total Profit"],
 						colWidths: [15, 17, 15, 15, 15]
 					});
 					// Add data from database to each table row
@@ -98,6 +98,7 @@ function supervisorOptions(){
 
 // Function that asks supervisor if there is another task he/she wants to do
 function askAgain(){
+	console.log("=============================================================");
 	inquirer.prompt([
 		{
 			type: "confirm",
@@ -110,7 +111,9 @@ function askAgain(){
 			supervisorOptions();
 		}
 		else{
-			console.log("All tasks are done.")
+			console.log("All tasks are done.");
+			// Exits node program execution
+			process.exit();
 		}
 	});
 }

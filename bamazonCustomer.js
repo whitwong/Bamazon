@@ -83,6 +83,7 @@ function customerTransaction(){
 				else{
 					console.log("Insufficient quantity! Cannot process order.");
 					console.log("You want to order " + purchase.quantity + ", but we only have " + res[0].stock_quantity + " in stock.");
+					console.log("=============================================================");
 					askAgain();
 				}
 
@@ -91,6 +92,7 @@ function customerTransaction(){
 					connection.query("SELECT * FROM products WHERE item_id = ?", [purchase.item],function(err, res){
 						console.log("The total cost of your purchase today is " 
 							+ (res[0].price*parseInt(purchase.quantity)).toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
+						console.log("=============================================================");
 					askAgain();
 					});
 				}
@@ -113,7 +115,9 @@ function askAgain(){
 			customerTransaction();
 		}
 		else{
-			console.log("Your shopping is complete!")
+			console.log("Your shopping is complete!");
+			// Exits node program execution
+			process.exit();
 		}
 	});
 }

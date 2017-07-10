@@ -169,6 +169,7 @@ function managerOptions(){
 
 // Function that asks manager if there is another task he/she wants to do
 function askAgain(){
+	console.log("=============================================================");
 	inquirer.prompt([
 		{
 			type: "confirm",
@@ -181,7 +182,9 @@ function askAgain(){
 			managerOptions();
 		}
 		else{
-			console.log("All tasks are done.")
+			console.log("All tasks are done.");
+			// Exits node program execution
+			process.exit();
 		}
 	});
 }
